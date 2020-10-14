@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd">
+
+	<bean id = "db" class = "com.hsbc.DBUtility">
+		<!-- <property name="username" value = "system"></property>
+		<property name="password" value = "root"></property> -->
+		<constructor-arg index = "0" value = "admin"></constructor-arg>
+		<constructor-arg index = "1" value = "welcome123"></constructor-arg>
+	</bean>
+
+	<bean id = "dao" class = "com.hsbc.JdbcBackedDao">
+		<property name = "dbutility" ref = "db"></property>
+
+		<constructor-arg index = "0" ref = "db"></constructor-arg> <!-- first requirement -->
+
+		<!-- <constructor-arg index = "0" ref = "db"></constructor-arg> -->
+
+	</bean>	
+	
+	<bean id = "hdao" class = "com.hsbc.HibernateBackedDao">
+		<property name = "dbutility" ref = "db"></property>
+		
+	</bean>	
+	
+	<bean id = "service" class = "com.hsbc.AccountServiceImpl">
+		<property name = "accountDao" ref = "dao"></property>
+		
+	</bean>	
+
+</beans>
+
+
+
+
+
+
+
+ 
+	
+
